@@ -8,5 +8,6 @@ class Temperature(models.Model):
 
     class Meta:
         ordering = ['date_time']
+        
     def __str__(self):
         return "Temperature " + str(self.temp) + " on " + str(self.date_time)

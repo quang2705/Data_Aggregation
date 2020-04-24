@@ -5,17 +5,12 @@ from rest_framework.response import Response
 
 from data_agg_api.models import Temperature
 from data_agg_api.serializers import TemperatureSerializer
+from data_agg_api.utils import check_for_key
+
 from rest_framework.decorators import action, parser_classes
 from rest_framework.parsers import JSONParser, FileUploadParser
 import json
-#check to see if there is a required parameters for creating
-#a database object
-def check_for_key(request_data, key_list):
-	for key in key_list:
-		try:
-			val = request_data[key]
-		except KeyError:
-			return Response('You dont have the params `{0}`'.format(key))
+
 
 class TemperatureViewSet(viewsets.ModelViewSet):
 	queryset = Temperature.objects.all()
