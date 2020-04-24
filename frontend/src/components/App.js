@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-
+import Row from "react-bootstrap/Row";
 import {
   XYPlot,
   XAxis,
@@ -74,13 +74,11 @@ class App extends Component {
       });
     return (
         <>
-            <Container className="p-1">
+            <Container className="p-3">
                 <Jumbotron>
-                    <h1 className="header"> Data Aggregation</h1>
-                    <p> This is a project that allows you to drop your data to the chart for visualization
-                    </p>
+                    <h1> Data Aggregation</h1>
+                    <p> This is a project that allows you to drop your data to the chart for visualization</p>
                 </Jumbotron>
-
                 <Form>
                     <Form.Row>
                         <Col sm={2}>
@@ -93,7 +91,6 @@ class App extends Component {
                             onChange={(e) => this.onChangeHandler(e)}
                             />
                         </Col>
-
                         <Col sm={4}>
                             <Button variant="primary" onClick={(e) => this.onClickUpload(e)}>Upload</Button>
                         </Col>
@@ -113,16 +110,19 @@ class App extends Component {
 
                     <Button variant="primary" onClick={(e) => this.filterDate()}>Filter</Button>
                 </Form>
-
-                <XYPlot xType="time" width={700} height={400}>
-                  <HorizontalGridLines />
-                  <VerticalGridLines />
-                  <XAxis title="X Axis" />
-                  <YAxis title="Y Axis" />
-                  <LineSeries
-                    data={temp_data}
-                  />
-               </XYPlot>
+                <Row className="justify-content-md-center">
+                    <span>
+                        <Col>
+                            <XYPlot xType="time" width={700} height={400}>
+                              <HorizontalGridLines />
+                              <VerticalGridLines />
+                              <XAxis title="X Axis" />
+                              <YAxis title="Y Axis" />
+                              <LineSeries data={temp_data}/>
+                           </XYPlot>
+                       </Col>
+                   </span>
+               </Row>
             </Container>
 
 
