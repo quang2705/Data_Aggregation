@@ -36,8 +36,6 @@ class App extends Component {
 
   onTextChangeHandler(event) {
       this.setState({[event.target.name]: event.target.value});
-      console.log(this.state.start_datetime);
-      console.log(this.state.end_datetime);
   }
 
   onChangeHandler(event) {
@@ -46,7 +44,10 @@ class App extends Component {
   }
 
   onClickUpload(event) {
-      API.upload_temperatures(this.state.dataFile);
+      API.upload_temperatures(this.state.dataFile)
+      .then((data) => {
+          document.getElementById("file-name").innerHTML = '';
+      });
   }
 
   filterDate() {
@@ -59,15 +60,6 @@ class App extends Component {
 
 
   render() {
-      // <input type="file" name="file" onChange={(e) => this.onChangeHandler(e)}/><br/>
-      // <input type="button" value="upload" onClick={(e) => this.onClickUpload(e)}/><br/>
-      // <input type='button' value='filter' onClick={(e) => this.filterDate()}/><br/>
-      // <label> start time
-      //     <input type="datetime-local" name="start_datetime" onChange={(e) => this.onTextChangeHandler(e)}/>
-      // </label>
-      // <label> end time
-      //     <input type="datetime-local" name="end_datetime" onChange={(e) => this.onTextChangeHandler(e)}/>
-      // </label>
       var temp_data = this.state.data.map((temperature, index) => {
           let date_time = new Date(temperature.date_time);
           return {x: date_time.getTime(), y: temperature.temp};

@@ -46,7 +46,10 @@ class TemperatureViewSet(viewsets.ModelViewSet):
 	@parser_classes([FileUploadParser])
 	def upload(self, request):
 		file = request.data['data_file']
-		data = file.read().decode('utf-8')
+		if (type(file) == str):
+			data = file
+		else:
+			data = file.read().decode('utf-8')
 		data = json.loads(data)
 		for data_point in data['data']:
 			temp = data_point['val']
